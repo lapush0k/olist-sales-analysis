@@ -12,5 +12,3 @@ for example, `1151` instead of `01151`.
   code, so the analysis was not affected.
 - **If you plan to use this column further** (geo-analysis, joining with a
   ZIP code reference table): convert it to text and pad with zeros to 5 digits.
-
-Translated with DeepL.com (free version)
