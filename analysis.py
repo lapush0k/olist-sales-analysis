@@ -7,15 +7,13 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 
 conn = sqlite3.connect("olist.db")
+base_dir = os.path.dirname(os.path.abspath(__file__))
+sql_path = os.path.join(base_dir, '02_sales.sql')
 
-query = '''
-select strftime('%Y-%m', order_purchase_timestamp) as month, round(sum(price), 2) as revenue 
-from order_items
-join orders on orders.order_id = order_items.order_id
-where order_status = 'delivered'
-group by month
-order by month;
-'''
+with open(sql_path, encoding='utf-8') as f:
+    queries = f.read().split(';')
+
+query = queries[0]
 df = pd.read_sql(query, conn)
 conn.close()
 
