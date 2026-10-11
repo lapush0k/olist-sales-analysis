@@ -34,6 +34,7 @@ plt.tight_layout()
 plt.savefig('images/revenue_by_month.png', dpi=150)
 
 # Top 10 Categories by Revenue
+
 conn = sqlite3.connect("olist.db")
 base_dir = os.path.dirname(os.path.abspath(__file__))
 sql_path = os.path.join(base_dir, '02_sales.sql')
@@ -53,3 +54,24 @@ plt.title('Top 10 Categories by Revenue')
 plt.xlabel('Revenue, BRL')
 plt.tight_layout()
 plt.savefig('images/top10_categories.png', dpi=150)
+
+# Orders by State (Top 10)
+
+conn = sqlite3.connect('olist.db')
+base_dir = os.path.dirname(os.path.abspath(__file__))
+sql_path = os.path.join(base_dir, '01_basics.sql')
+
+with open(sql_path, encoding='utf-8') as f:
+    queries = f.read().split(';')
+
+query = queries[2]
+df = pd.read_sql(query, conn)
+conn.close()
+
+plt.figure(figsize=(10, 6))
+plt.bar(df['customer_state'], df['count_order'])
+plt.title('Delivered orders by state (top 10)')
+plt.xlabel('State')
+plt.ylabel('Number of orders')
+plt.tight_layout()
+plt.savefig('images/orders_by_state.png', dpi=150)
