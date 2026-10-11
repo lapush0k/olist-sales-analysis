@@ -1,3 +1,5 @@
+# Grafic a monthly revenue
+
 import sqlite3
 import os
 import pandas as pd
@@ -30,3 +32,24 @@ plt.xlabel('Month')
 plt.ylabel('Revenue, BRL')
 plt.tight_layout()
 plt.savefig('images/revenue_by_month.png', dpi=150)
+
+# Top 10 Categories by Revenue
+conn = sqlite3.connect("olist.db")
+base_dir = os.path.dirname(os.path.abspath(__file__))
+sql_path = os.path.join(base_dir, '02_sales.sql')
+
+with open(sql_path, encoding='utf-8') as f:
+    queries = f.read().split(';')
+
+query = queries[1]
+df = pd.read_sql(query, conn)
+df['category'] = df['category'].str.replace('_', ' ')
+conn.close()
+plt.figure(figsize=(10, 6))
+plt.barh(df['category'], df['revenue'])
+plt.gca().invert_yaxis()
+plt.gca().xaxis.set_major_formatter(FuncFormatter(lambda x, _: f'{x/1e6:.1f}M'))
+plt.title('Top 10 Categories by Revenue')
+plt.xlabel('Revenue, BRL')
+plt.tight_layout()
+plt.savefig('images/top10_categories.png', dpi=150)
