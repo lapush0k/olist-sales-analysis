@@ -19,7 +19,7 @@ This project analyzes the Brazilian e-commerce dataset by Olist (~100k orders, 2
 - Top 3 categories by revenue: health_beauty, watches_gifts, bed_bath_table
 - Most orders come from the state of São Paulo: 40,501 orders (about 42% of all delivered orders) 
 - Peak monthly revenue: November 2017 (987,765.37 BRL)
-
+- Biggest month-over-month growth: +52.4% in November 2017, biggest drop: -26.5% in December 2017
 
 ## Charts
 
@@ -39,7 +39,7 @@ This project analyzes the Brazilian e-commerce dataset by Olist (~100k orders, 2
 
 - `load_to_sqlite.py` loads the CSV files into `olist.db`
 - `explore.py` quick overview of every table
-- `sql/` SQL queries (`01_basics.sql`, `02_sales.sql`, `03_delivery_and_customers.sql`)
+- `sql/` SQL queries (`01_basics.sql`, `02_sales.sql`, `03_delivery_and_customers.sql`, `04_window_functions.sql`)
 - `analysis.py` builds the charts in `images/`
 - `checks.py` checks that `customer_id` is not a unique person (see Data notes)
 
